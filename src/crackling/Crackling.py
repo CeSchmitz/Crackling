@@ -8,6 +8,7 @@ Config:
 '''
 
 import ast, csv, joblib, os, re, sys, time, tempfile
+from subprocess import TimeoutExpired
 
 from crackling.Paginator import Paginator
 from crackling.Batchinator import Batchinator
@@ -398,12 +399,42 @@ def Crackling(configMngr):
                     check=True
                 )
 
-                os.replace('RNAfold_output.fold' ,configMngr['rnafold']['output'])
+                success = False
+                while (success == False):
+                    try:
+                        runner('{} --noPS -j{} -i {} -o'.format(
+                                configMngr['rnafold']['binary'],
+                                configMngr['rnafold']['threads'],
+                                configMngr['rnafold']['input']
+                            ),
+                            timeout=5400, # Timeout set to an hour and a half
+                            shell=True,
+                            check=True,
+                        )
+                        # Call has returned within timeout
+                        success = True
+                    except TimeoutExpired:
+                        # Call has timed out, Check if a valid output was generated
+                        printer('RNAfold timed out, Checking output')
+                        # Attempt to open outputfile
+                        try:
+                            with open('RNAfold_output.fold', 'r') as output:
+                                # Check output length, should be 2 lines per guide
+                                if len(output.readlines) != guidesInPage*2 :
+                                    # Valid output, continue
+                                    printer('Valid output detected, Continuing')
+                                    success = True
+                                else:
+                                    raise ValueError
+                        except:
+                            # There was no output file, run again
+                            printer('No valid output detected, Retrying')
+                            continue
 
                 printer('\t\tStarting to process the RNAfold results.')
 
                 RNAstructures = {}
-                with open(configMngr['rnafold']['output'], 'r') as fRnaOutput:
+                with open('RNAfold_output.fold', 'r') as fRnaOutput:
                     i = 0
                     L1, L2, target = None, None, None
                     for line in fRnaOutput:
@@ -831,7 +862,7 @@ def Crackling(configMngr):
         printer('Cleaning auxiliary files')
         for f in [
             configMngr['rnafold']['input'],
-            configMngr['rnafold']['output'],
+            'RNAfold_output.fold',
             configMngr['offtargetscore']['input'],
             configMngr['offtargetscore']['output'],
             configMngr['bowtie2']['input'],
