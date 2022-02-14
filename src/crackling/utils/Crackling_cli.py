@@ -1,7 +1,7 @@
-from crackling import Crackling
 from crackling import ConfigManager
 from pathlib import Path
 from crackling.Helpers import printer
+from crackling.cracklingClass import Crackling
 
 import argparse
 
@@ -18,7 +18,9 @@ def main():
     else:
         printer('Crackling is starting...')
 
-    Crackling(cm)
-    
+    c = Crackling(cm)   
+    c.run()
+
+
 if __name__ == '__main__':
     main()

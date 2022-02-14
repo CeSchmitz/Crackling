@@ -10,7 +10,7 @@ Config:
 import ast, csv, joblib, os, re, sys, time, tempfile
 
 from crackling.Paginator import Paginator
-from crackling.Batchinator import Batchinator
+from crackling.guideBatchinator import guideBatchinator as Batchinator
 from crackling.Constants import *
 from crackling.Helpers import *
 
