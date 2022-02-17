@@ -1,7 +1,6 @@
-import nose.tools, nose
 from crackling.sgrnascorer2 import sgrnascorer2
 from crackling.Constants import *
-from crackling import *
+from crackling import ConfigManager
 
 ##########################
 ## Testing sgrnaScorer2 ##
@@ -61,8 +60,4 @@ def test_sgranscorer2_onTestDataset():
 
     # Run sgrnaScorer2
     sgrnascorer2(result, cm)
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
-
-
-if __name__ == '__main__':
-    nose.run()
+    assert expected == result
