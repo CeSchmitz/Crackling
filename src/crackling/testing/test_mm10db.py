@@ -1,7 +1,6 @@
-import nose.tools, nose
 from crackling.mm10db import transToDNA, AT_percentage, polyT, leadingT, mm10db
 from crackling.Constants import *
-from crackling import *
+from crackling import ConfigManager
 
 ########################
 ## Testing leadingT ##
@@ -9,7 +8,7 @@ from crackling import *
 def test_leadingT_onRandomSeq():
     result = leadingT('TTTGTGTCATATTCTTCCTAT')
     expected = False
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 
 ###########################
@@ -18,37 +17,37 @@ def test_leadingT_onRandomSeq():
 def test_AT_percentage_onFullATSeq():
     result = AT_percentage('ATATATATATATATATATATA')
     expected = 100.00
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_AT_percentage_onFullASeq():
     result = AT_percentage('AAAAAAAAAAAAAAAAAAAAA')
     expected = 100.00
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_AT_percentage_onFullTSeq():
     result = AT_percentage('TTTTTTTTTTTTTTTTTTTTT')
     expected = 100.00
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_AT_percentage_onFullGSeq():
     result = AT_percentage('GGGGGGGGGGGGGGGGGGGGG')
     expected = 0.00
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_AT_percentage_onFullCSeq():
     result = AT_percentage('CCCCCCCCCCCCCCCCCCCCC')
     expected = 0.00
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_AT_percentage_onRepeatingATGCSeq():
     result = AT_percentage('ATGCATGCATGCATGCATGCA')
     expected = 52.38095238095238
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_AT_percentage_onRandomSeq():
     result = AT_percentage('TTTGTGTCATATTCTTCCTAT')
     expected = 71.42857142857143
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 
 ###################
@@ -57,7 +56,7 @@ def test_AT_percentage_onRandomSeq():
 def test_polyT_onRandomSeq():
     result = polyT('TTTGTGTCATATTCTTCCTAT')
     expected = False
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 
 ########################
@@ -66,7 +65,7 @@ def test_polyT_onRandomSeq():
 def test_transToDNA_on():
     result = transToDNA('AACCUUGG')
     expected = 'AACCTTGG'
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 
 #####################
@@ -133,8 +132,4 @@ def test_mm10db():
 
     # Run mm10db
     mm10db(result, cm)
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
-
-
-if __name__ == '__main__':
-    nose.run()
+    assert expected == result
