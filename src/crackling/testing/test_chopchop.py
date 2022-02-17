@@ -1,7 +1,6 @@
-import nose.tools, nose
 from crackling.chopchop import chopchop, G20
 from crackling.Constants import *
-from crackling import *
+from crackling import ConfigManager
 
 #################
 ## Testing G20 ##
@@ -9,37 +8,37 @@ from crackling import *
 def test_G20_onFullATSeq():
     result = G20('ATATATATATATATATATATA')
     expected = False
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_G20_onFullASeq():
     result = G20('AAAAAAAAAAAAAAAAAAAAA')
     expected = False
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_G20_onFullTSeq():
     result = G20('TTTTTTTTTTTTTTTTTTTTT')
     expected = False
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_G20_onFullGSeq():
     result = G20('GGGGGGGGGGGGGGGGGGGGG')
     expected = True
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_G20_onFullCSeq():
     result = G20('CCCCCCCCCCCCCCCCCCCCC')
     expected = False
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_G20_onRepeatingATGCSeq():
     result = G20('ATGCATGCATGCATGCATGCA')
     expected = False
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 def test_G20_onRandomSeq():
     result = G20('TTTGTGTCATATTCTTCCTGT')
     expected = True
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 
 ######################
@@ -90,8 +89,4 @@ def test_chopchop_onTestDataset():
 
     # Run chopchop
     chopchop(result, cm)
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
-
-
-if __name__ == '__main__':
-    nose.run()
+    assert expected == result
