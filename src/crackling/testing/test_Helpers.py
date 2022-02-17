@@ -1,6 +1,5 @@
-import nose.tools
-import sys, io, datetime
 from crackling.Helpers import *
+import sys, io, datetime, pytest
 from subprocess import CalledProcessError, TimeoutExpired
 
 ################
@@ -9,7 +8,7 @@ from subprocess import CalledProcessError, TimeoutExpired
 def test_rc_onPalindromicSeq():
     result = rc('ACGTACGTACGTACGTACGT')
     expected = 'ACGTACGTACGTACGTACGT'
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
 
 #####################
@@ -26,10 +25,10 @@ def test_printer_output():
     # Reset stdout
     sys.stdout = old_stdout
     # Get caputed stdout value
-    result = mystdout.getvalue()
+    result = mystdout.getvalue().strip()
     # Extract phrase
     resultPhrase = result[32:]
-    nose.tools.eq_(expectedPhrase.strip(), resultPhrase.strip(), f'\nExpected:\t{expectedPhrase}\nActually:\t{resultPhrase}')
+    assert expectedPhrase == resultPhrase.strip()
 
 def test_printer_timestamp():
     # Setting up stdout capture
@@ -50,7 +49,7 @@ def test_printer_timestamp():
         testDate[0], testDate[1], testDate[2],
         testTime[0], testTime[1], testTime[2], testTime[3]
         )
-    nose.tools.eq_(expectedDateTime, resultDateTime, f'\nExpected:\t{expectedDateTime}\nActually:\t{resultDateTime}')
+    assert expectedDateTime == resultDateTime
 
 
 ####################
@@ -77,18 +76,14 @@ def test_runner_output():
     # Strip time stamps
     result[0] = result[0][32:]
     result[2] = result[2][32:]
-    nose.tools.eq_(expected, result, f'\nExpected:\t{expected}\nActually:\t{result}')
+    assert expected == result
 
-@nose.tools.raises(CalledProcessError)
 def test_runner_errorChecking():
-    # Should raise exception
-    runner('exit 1', shell=True, check=True)
+    with pytest.raises(CalledProcessError):
+        # Should raise exception
+        runner('exit 1', shell=True, check=True)
 
-@nose.tools.raises(TimeoutExpired)
 def test_runner_timeout():
-    # Should raise exception
-    runner('sleep 0.001', shell=True, check=True, timeout=0.0001)
-
-
-if __name__ == '__main__':
-    nose.run()
+    with pytest.raises(TimeoutExpired): 
+        # Should raise exception
+        runner('sleep 0.001', shell=True, check=True, timeout=0.0001)
