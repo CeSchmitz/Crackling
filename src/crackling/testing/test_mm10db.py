@@ -85,48 +85,118 @@ def test_mm10db():
     # Create result candidate guide dictionary
     result = {
         'AAAAAAAAAAAAAAAAAAAAA': {
-            'acceptedBySgRnaScorer' : CODE_UNTESTED,
-            'sgrnascorer2score'     : CODE_UNTESTED
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
         'TTTTTTTTTTTTTTTTTTTTT': {
-            'acceptedBySgRnaScorer' : CODE_UNTESTED,
-            'sgrnascorer2score'     : CODE_UNTESTED
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
         'GGGGGGGGGGGGGGGGGGGGG': {
-            'acceptedBySgRnaScorer' : CODE_UNTESTED,
-            'sgrnascorer2score'     : CODE_UNTESTED
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
         'CCCCCCCCCCCCCCCCCCCCC': {
-            'acceptedBySgRnaScorer' : CODE_UNTESTED,
-            'sgrnascorer2score'     : CODE_UNTESTED
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
         'TTTGTGTCATATTCTTCCTGT': {
-            'acceptedBySgRnaScorer' : CODE_UNTESTED,
-            'sgrnascorer2score'     : CODE_UNTESTED
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
     }
 
     # Create expected results candidate guide dictionary
     expected = {
         'AAAAAAAAAAAAAAAAAAAAA': {
-            'acceptedBySgRnaScorer' : CODE_ACCEPTED,
-            'sgrnascorer2score'     : 0.6509799174117802
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
         'TTTTTTTTTTTTTTTTTTTTT': {
-            'acceptedBySgRnaScorer' : CODE_REJECTED,
-            'sgrnascorer2score'     : -7.721831867973529
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
         'GGGGGGGGGGGGGGGGGGGGG': {
-            'acceptedBySgRnaScorer' : CODE_ACCEPTED,
-            'sgrnascorer2score'     : 3.5543409089281313
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
         'CCCCCCCCCCCCCCCCCCCCC': {
-            'acceptedBySgRnaScorer' : CODE_ACCEPTED,
-            'sgrnascorer2score'     : 1.221131568891114
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
         'TTTGTGTCATATTCTTCCTGT': {
-            'acceptedBySgRnaScorer' : CODE_REJECTED,
-            'sgrnascorer2score'     : -0.18335989838239686
+            'passedAvoidLeadingT'       : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'passedTTTT'                : CODE_UNTESTED,
+            'passedATPercent'           : CODE_UNTESTED,
+            'ssL1'                      : CODE_UNTESTED,
+            'ssStructure'               : CODE_UNTESTED,
+            'ssEnergy'                  : CODE_UNTESTED,
+            'passedSecondaryStructure'  : CODE_UNTESTED,
+            'acceptedByMm10db'          : CODE_UNTESTED
         },
     }
 

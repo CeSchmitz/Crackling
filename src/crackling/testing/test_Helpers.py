@@ -87,3 +87,10 @@ def test_runner_timeout():
     with pytest.raises(TimeoutExpired): 
         # Should raise exception
         runner('sleep 0.001', shell=True, check=True, timeout=0.0001)
+
+
+###################################
+## Testing filterCandidateGuides ##
+###################################
+def test_filterCandidateGuides():
+    pass
