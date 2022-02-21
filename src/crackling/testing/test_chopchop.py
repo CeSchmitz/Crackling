@@ -1,6 +1,7 @@
 from crackling.chopchop import chopchop, G20
 from crackling.Constants import *
 from crackling import ConfigManager
+import pytest
 
 #################
 ## Testing G20 ##
@@ -39,6 +40,15 @@ def test_G20_onRandomSeq():
     result = G20('TTTGTGTCATATTCTTCCTGT')
     expected = True
     assert expected == result
+
+def test_G20_onEmptyString():
+    result = G20('')
+    expected = False
+    assert expected == result
+
+def test_G20_onNumber():
+    with pytest.raises(TypeError): 
+        G20(123456789)
 
 
 ######################

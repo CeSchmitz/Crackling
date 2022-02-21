@@ -127,5 +127,5 @@ def filterCandidateGuides(configMngr: ConfigManager, candidateGuides: dict, modu
                 if (candidateGuides[target23]['passedBowtie'] == CODE_REJECTED):
                     continue
         
-        # Given none of the failure conditions have been meet, yeild guide
+        # Given none of the failure conditions have been met, yeild guide
         yield target23

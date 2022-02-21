@@ -1,4 +1,5 @@
 from crackling.Helpers import *
+from crackling import ConfigManager
 import sys, io, datetime, pytest
 from subprocess import CalledProcessError, TimeoutExpired
 
@@ -28,7 +29,7 @@ def test_printer_output():
     result = mystdout.getvalue().strip()
     # Extract phrase
     resultPhrase = result[32:]
-    assert expectedPhrase == resultPhrase.strip()
+    assert expectedPhrase == resultPhrase
 
 def test_printer_timestamp():
     # Setting up stdout capture
@@ -93,4 +94,5 @@ def test_runner_timeout():
 ## Testing filterCandidateGuides ##
 ###################################
 def test_filterCandidateGuides():
-    pass
+    # Setup Config Manager
+    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))

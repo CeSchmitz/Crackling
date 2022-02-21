@@ -1,14 +1,59 @@
+from re import T
 from crackling.mm10db import transToDNA, AT_percentage, polyT, leadingT, mm10db
 from crackling.Constants import *
 from crackling import ConfigManager
+import pytest
 
 ########################
 ## Testing leadingT ##
 ########################
+def test_leadingT_onFullATSeq():
+    result = leadingT('ATATATATATATATATATATA')
+    expected = True
+    assert expected == result
+
+def test_leadingT_onFullASeq():
+    result = leadingT('AAAAAAAAAAAAAAAAAAAAA')
+    expected = True
+    assert expected == result
+
+def test_leadingT_onFullTSeq():
+    result = leadingT('TTTTTTTTTTTTTTTTTTTTT')
+    expected = False
+    assert expected == result
+
+def test_leadingT_onFullGSeq():
+    result = leadingT('GGGGGGGGGGGGGGGGGGGGG')
+    expected = True
+    assert expected == result
+
+def test_leadingT_onFullCSeq():
+    result = leadingT('CCCCCCCCCCCCCCCCCCCCC')
+    expected = True
+    assert expected == result
+
+def test_leadingT_onRepeatingATGCSeq():
+    result = leadingT('ATGCATGCATGCATGCATGCA')
+    expected = True
+    assert expected == result
+
 def test_leadingT_onRandomSeq():
     result = leadingT('TTTGTGTCATATTCTTCCTAT')
     expected = False
     assert expected == result
+
+def test_leadingT_onRandomSeq():
+    result = leadingT('TTTGTGTCATATTCTTCCTAT')
+    expected = False
+    assert expected == result
+
+def test_leadingT_onEmptyString():
+    with pytest.raises(TypeError):
+        leadingT('')
+
+def test_leadingT_onNumber():
+    with pytest.raises(TypeError):
+        leadingT(123456789)
 
 
 ###########################
@@ -49,23 +94,107 @@ def test_AT_percentage_onRandomSeq():
     expected = 71.42857142857143
     assert expected == result
 
+def test_AT_percentage_onEmptyString():
+    with pytest.raises(TypeError):
+        AT_percentage('')
+
+def test_AT_percentage_onNumber():
+    with pytest.raises(TypeError):
+        AT_percentage(123456789)
+
 
 ###################
 ## Testing polyT ##
 ###################
+def test_polyT_onFullATSeq():
+    result = polyT('ATATATATATATATATATATA')
+    expected = False
+    assert expected == result
+
+def test_polyT_onFullASeq():
+    result = polyT('AAAAAAAAAAAAAAAAAAAAA')
+    expected = False
+    assert expected == result
+
+def test_polyT_onFullTSeq():
+    result = polyT('TTTTTTTTTTTTTTTTTTTTT')
+    expected = True
+    assert expected == result
+
+def test_polyT_onFullGSeq():
+    result = polyT('GGGGGGGGGGGGGGGGGGGGG')
+    expected = False
+    assert expected == result
+
+def test_polyT_onFullCSeq():
+    result = polyT('CCCCCCCCCCCCCCCCCCCCC')
+    expected = False
+    assert expected == result
+
+def test_polyT_onRepeatingATGCSeq():
+    result = polyT('ATGCATGCATGCATGCATGCA')
+    expected = False
+    assert expected == result
+
 def test_polyT_onRandomSeq():
     result = polyT('TTTGTGTCATATTCTTCCTAT')
     expected = False
     assert expected == result
 
+def test_polyT_onEmptyString():
+    with pytest.raises(TypeError):
+        polyT('')
+
+def test_polyT_onNumber():
+    with pytest.raises(TypeError):
+        polyT(123456789)
+
 
 ########################
 ## Testing transToDNA ##
 ########################
-def test_transToDNA_on():
-    result = transToDNA('AACCUUGG')
-    expected = 'AACCTTGG'
+def test_transToDNA_onFullAUSeq():
+    result = transToDNA('AUAUAUAUAUAUAUAUAUAUA')
+    expected = 'ATATATATATATATATATATA'
     assert expected == result
+
+def test_transToDNA_onFullASeq():
+    result = transToDNA('AAAAAAAAAAAAAAAAAAAAA')
+    expected = 'AAAAAAAAAAAAAAAAAAAAA'
+    assert expected == result
+
+def test_transToDNA_onFullUSeq():
+    result = transToDNA('UUUUUUUUUUUUUUUUUUUUU')
+    expected = 'TTTTTTTTTTTTTTTTTTTTT'
+    assert expected == result
+
+def test_transToDNA_onFullGSeq():
+    result = transToDNA('GGGGGGGGGGGGGGGGGGGGG')
+    expected = 'GGGGGGGGGGGGGGGGGGGGG'
+    assert expected == result
+
+def test_transToDNA_onFullCSeq():
+    result = transToDNA('CCCCCCCCCCCCCCCCCCCCC')
+    expected = 'CCCCCCCCCCCCCCCCCCCCC'
+    assert expected == result
+
+def test_transToDNA_onRepeatingAUGCSeq():
+    result = transToDNA('AUGCAUGCAUGCAUGCAUGCA')
+    expected = 'ATGCATGCATGCATGCATGCA'
+    assert expected == result
+
+def test_transToDNA_onRandomSeq():
+    result = transToDNA('UUUGUGUCAUAUUCUUCCUAU')
+    expected = 'TTTGTGTCATATTCTTCCTAT'
+    assert expected == result
+
+def test_transToDNA_onEmptyString():
+    with pytest.raises(TypeError):
+        transToDNA('')
+
+def test_transToDNA_onNumber():
+    with pytest.raises(TypeError):
+        transToDNA(123456789)
 
 
 #####################
