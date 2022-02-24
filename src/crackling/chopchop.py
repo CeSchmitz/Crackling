@@ -24,4 +24,9 @@ def chopchop(candidateGuides: dict, configMngr: ConfigManager):
 
 
 def G20(candidateGuide: str) -> bool:
+    # Type checking
+    if (type(candidateGuide) != str):
+        raise TypeError('Incorrect input type')
+    elif (len(candidateGuide) != 23):
+        raise ValueError('Incorrect input length')
     return candidateGuide[19] == 'G'

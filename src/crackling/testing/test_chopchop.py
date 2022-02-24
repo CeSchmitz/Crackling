@@ -7,49 +7,63 @@ import pytest
 ## Testing G20 ##
 #################
 def test_G20_onFullATSeq():
-    result = G20('ATATATATATATATATATATA')
+    result = G20('ATATATATATATATATATATAGG')
     expected = False
     assert expected == result
 
 def test_G20_onFullASeq():
-    result = G20('AAAAAAAAAAAAAAAAAAAAA')
+    result = G20('AAAAAAAAAAAAAAAAAAAAAGG')
     expected = False
     assert expected == result
 
 def test_G20_onFullTSeq():
-    result = G20('TTTTTTTTTTTTTTTTTTTTT')
+    result = G20('TTTTTTTTTTTTTTTTTTTTTGG')
     expected = False
     assert expected == result
 
 def test_G20_onFullGSeq():
-    result = G20('GGGGGGGGGGGGGGGGGGGGG')
+    result = G20('GGGGGGGGGGGGGGGGGGGGGGG')
     expected = True
     assert expected == result
 
 def test_G20_onFullCSeq():
-    result = G20('CCCCCCCCCCCCCCCCCCCCC')
+    result = G20('CCCCCCCCCCCCCCCCCCCCCGG')
     expected = False
     assert expected == result
 
 def test_G20_onRepeatingATGCSeq():
-    result = G20('ATGCATGCATGCATGCATGCA')
+    result = G20('ATGCATGCATGCATGCATGCAGG')
     expected = False
     assert expected == result
 
 def test_G20_onRandomSeq():
-    result = G20('TTTGTGTCATATTCTTCCTGT')
+    result = G20('TTTGTGTCATATTCTTCCTGTGG')
     expected = True
     assert expected == result
 
-def test_G20_onEmptyString():
-    result = G20('')
-    expected = False
-    assert expected == result
+def test_G20_onEmptySeq():
+    with pytest.raises(ValueError): 
+        G20('')
+
+def test_G20_onShortSeq():
+    with pytest.raises(ValueError): 
+        G20('GACTGG')
+
+def test_G20_onLongSeq():
+    with pytest.raises(ValueError): 
+        G20('GACTGGTTTGTGTCATATTCTTCCTGTGG')
 
 def test_G20_onNumber():
     with pytest.raises(TypeError): 
         G20(123456789)
 
+def test_G20_onArray():
+    with pytest.raises(TypeError): 
+        G20(['T','A','T','G','T','G','T','G','A','T','A','T','A','C','T','T','G','C','T','G','T','G','G'])
+
+def test_G20_onDictionary():
+    with pytest.raises(TypeError): 
+        G20({'ATGCATGCATGCATGCATGCAGG':'ATGCATGCATGCATGCATGCAGG'})
 
 ######################
 ## Testing chopchop ##
@@ -61,38 +75,38 @@ def test_chopchop_onTestDataset():
     cm['general']['optimisation'] = 'ultralow'
     # Create result candidate guide dictionary
     result = {
-        'AAAAAAAAAAAAAAAAAAAAA': {
+        'AAAAAAAAAAAAAAAAAAAAAGG': {
             'passedG20' : CODE_UNTESTED
         },
-        'TTTTTTTTTTTTTTTTTTTTT': {
+        'TTTTTTTTTTTTTTTTTTTTTGG': {
             'passedG20' : CODE_UNTESTED
         },
-        'GGGGGGGGGGGGGGGGGGGGG': {
+        'GGGGGGGGGGGGGGGGGGGGGGG': {
             'passedG20' : CODE_UNTESTED
         },
-        'CCCCCCCCCCCCCCCCCCCCC': {
+        'CCCCCCCCCCCCCCCCCCCCCGG': {
             'passedG20' : CODE_UNTESTED
         },
-        'TTTGTGTCATATTCTTCCTGT': {
+        'TTTGTGTCATATTCTTCCTGTGG': {
             'passedG20' : CODE_UNTESTED
         },
     }
 
     # Create expected results candidate guide dictionary
     expected = {
-        'AAAAAAAAAAAAAAAAAAAAA': {
+        'AAAAAAAAAAAAAAAAAAAAAGG': {
             'passedG20' : CODE_REJECTED
         },
-        'TTTTTTTTTTTTTTTTTTTTT': {
+        'TTTTTTTTTTTTTTTTTTTTTGG': {
             'passedG20' : CODE_REJECTED
         },
-        'GGGGGGGGGGGGGGGGGGGGG': {
+        'GGGGGGGGGGGGGGGGGGGGGGG': {
             'passedG20' : CODE_ACCEPTED
         },
-        'CCCCCCCCCCCCCCCCCCCCC': {
+        'CCCCCCCCCCCCCCCCCCCCCGG': {
             'passedG20' : CODE_REJECTED
         },
-        'TTTGTGTCATATTCTTCCTGT': {
+        'TTTGTGTCATATTCTTCCTGTGG': {
             'passedG20' : CODE_ACCEPTED
         },
     }
