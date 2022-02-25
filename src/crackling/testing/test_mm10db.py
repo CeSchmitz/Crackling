@@ -1,153 +1,203 @@
 from re import T
+from unittest import result
 from crackling.mm10db import transToDNA, AT_percentage, polyT, leadingT, mm10db
 from crackling.Constants import *
-from crackling import ConfigManager
-import pytest
+from crackling.Helpers import printer, runner
+from crackling import ConfigManager, cracklingClass
+import pytest, os
 
 ########################
 ## Testing leadingT ##
 ########################
 def test_leadingT_onFullATSeq():
-    result = leadingT('ATATATATATATATATATATA')
-    expected = True
+    result = leadingT('ATATATATATATATATATATAGG')
+    expected = False
     assert expected == result
 
 def test_leadingT_onFullASeq():
-    result = leadingT('AAAAAAAAAAAAAAAAAAAAA')
-    expected = True
+    result = leadingT('AAAAAAAAAAAAAAAAAAAAAGG')
+    expected = False
     assert expected == result
 
 def test_leadingT_onFullTSeq():
-    result = leadingT('TTTTTTTTTTTTTTTTTTTTT')
-    expected = False
+    result = leadingT('TTTTTTTTTTTTTTTTTTTTTGG')
+    expected = True
     assert expected == result
 
 def test_leadingT_onFullGSeq():
-    result = leadingT('GGGGGGGGGGGGGGGGGGGGG')
-    expected = True
+    result = leadingT('GGGGGGGGGGGGGGGGGGGGGGG')
+    expected = False
     assert expected == result
 
 def test_leadingT_onFullCSeq():
-    result = leadingT('CCCCCCCCCCCCCCCCCCCCC')
-    expected = True
+    result = leadingT('CCCCCCCCCCCCCCCCCCCCCGG')
+    expected = False
     assert expected == result
 
 def test_leadingT_onRepeatingATGCSeq():
-    result = leadingT('ATGCATGCATGCATGCATGCA')
+    result = leadingT('ATGCATGCATGCATGCATGCAGG')
+    expected = False
+    assert expected == result
+
+def test_leadingT_onRandomSeq():
+    result = leadingT('TTTGTGTCATATTCTTCCTATGG')
     expected = True
     assert expected == result
 
 def test_leadingT_onRandomSeq():
-    result = leadingT('TTTGTGTCATATTCTTCCTAT')
-    expected = False
-    assert expected == result
-
-def test_leadingT_onRandomSeq():
-    result = leadingT('TTTGTGTCATATTCTTCCTAT')
-    expected = False
+    result = leadingT('TTTGTGTCATATTCTTCCTATGG')
+    expected = True
     assert expected == result
 
 def test_leadingT_onEmptyString():
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         leadingT('')
+
+def test_leadingT_onShortSeq():
+    with pytest.raises(ValueError): 
+        leadingT('GACTGG')
+
+def test_leadingT_onLongSeq():
+    with pytest.raises(ValueError): 
+        leadingT('GACTGGTTTGTGTCATATTCTTCCTGTGG')
 
 def test_leadingT_onNumber():
     with pytest.raises(TypeError):
         leadingT(123456789)
+
+def test_leadingT_onArray():
+    with pytest.raises(TypeError): 
+        leadingT(['T','A','T','G','T','G','T','G','A','T','A','T','A','C','T','T','G','C','T','G','T','G','G'])
+
+def test_leadingT_onDictionary():
+    with pytest.raises(TypeError): 
+        leadingT({'ATGCATGCATGCATGCATGCAGG':'ATGCATGCATGCATGCATGCAGG'})
 
 
 ###########################
 ## Testing AT_percentage ##
 ###########################
 def test_AT_percentage_onFullATSeq():
-    result = AT_percentage('ATATATATATATATATATATA')
+    result = AT_percentage('ATATATATATATATATATAT')
     expected = 100.00
     assert expected == result
 
 def test_AT_percentage_onFullASeq():
-    result = AT_percentage('AAAAAAAAAAAAAAAAAAAAA')
+    result = AT_percentage('AAAAAAAAAAAAAAAAAAAA')
     expected = 100.00
     assert expected == result
 
 def test_AT_percentage_onFullTSeq():
-    result = AT_percentage('TTTTTTTTTTTTTTTTTTTTT')
+    result = AT_percentage('TTTTTTTTTTTTTTTTTTTT')
     expected = 100.00
     assert expected == result
 
 def test_AT_percentage_onFullGSeq():
-    result = AT_percentage('GGGGGGGGGGGGGGGGGGGGG')
+    result = AT_percentage('GGGGGGGGGGGGGGGGGGGG')
     expected = 0.00
     assert expected == result
 
 def test_AT_percentage_onFullCSeq():
-    result = AT_percentage('CCCCCCCCCCCCCCCCCCCCC')
+    result = AT_percentage('CCCCCCCCCCCCCCCCCCCC')
     expected = 0.00
     assert expected == result
 
 def test_AT_percentage_onRepeatingATGCSeq():
-    result = AT_percentage('ATGCATGCATGCATGCATGCA')
-    expected = 52.38095238095238
+    result = AT_percentage('ATGCATGCATGCATGCATGC')
+    expected = 50.0
     assert expected == result
 
 def test_AT_percentage_onRandomSeq():
-    result = AT_percentage('TTTGTGTCATATTCTTCCTAT')
-    expected = 71.42857142857143
+    result = AT_percentage('TTTGTGTCATATTCTTCCTA')
+    expected = 70.0
     assert expected == result
 
 def test_AT_percentage_onEmptyString():
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         AT_percentage('')
+
+def test_AT_percentage_onShortSeq():
+    with pytest.raises(ValueError): 
+        AT_percentage('GACTGG')
+
+def test_AT_percentage_onLongSeq():
+    with pytest.raises(ValueError): 
+        AT_percentage('GACTGGTTTGTGTCATATTCTTCCTGTGG')
 
 def test_AT_percentage_onNumber():
     with pytest.raises(TypeError):
         AT_percentage(123456789)
+
+def test_AT_percentage_onArray():
+    with pytest.raises(TypeError): 
+        AT_percentage(['T','A','T','G','T','G','T','G','A','T','A','T','A','C','T','T','G','C','T','G','T','G','G'])
+
+def test_AT_percentage_onDictionary():
+    with pytest.raises(TypeError): 
+        AT_percentage({'ATGCATGCATGCATGCATGCAGG':'ATGCATGCATGCATGCATGCAGG'})
 
 
 ###################
 ## Testing polyT ##
 ###################
 def test_polyT_onFullATSeq():
-    result = polyT('ATATATATATATATATATATA')
+    result = polyT('ATATATATATATATATATATAGG')
     expected = False
     assert expected == result
 
 def test_polyT_onFullASeq():
-    result = polyT('AAAAAAAAAAAAAAAAAAAAA')
+    result = polyT('AAAAAAAAAAAAAAAAAAAAAGG')
     expected = False
     assert expected == result
 
 def test_polyT_onFullTSeq():
-    result = polyT('TTTTTTTTTTTTTTTTTTTTT')
+    result = polyT('TTTTTTTTTTTTTTTTTTTTTGG')
     expected = True
     assert expected == result
 
 def test_polyT_onFullGSeq():
-    result = polyT('GGGGGGGGGGGGGGGGGGGGG')
+    result = polyT('GGGGGGGGGGGGGGGGGGGGGGG')
     expected = False
     assert expected == result
 
 def test_polyT_onFullCSeq():
-    result = polyT('CCCCCCCCCCCCCCCCCCCCC')
+    result = polyT('CCCCCCCCCCCCCCCCCCCCCGG')
     expected = False
     assert expected == result
 
 def test_polyT_onRepeatingATGCSeq():
-    result = polyT('ATGCATGCATGCATGCATGCA')
+    result = polyT('ATGCATGCATGCATGCATGCAGG')
     expected = False
     assert expected == result
 
 def test_polyT_onRandomSeq():
-    result = polyT('TTTGTGTCATATTCTTCCTAT')
+    result = polyT('TTTGTGTCATATTCTTCCTATGG')
     expected = False
     assert expected == result
 
 def test_polyT_onEmptyString():
-    with pytest.raises(TypeError):
+    with pytest.raises(ValueError):
         polyT('')
+
+def test_polyT_onShortSeq():
+    with pytest.raises(ValueError): 
+        polyT('GACTGG')
+
+def test_polyT_onLongSeq():
+    with pytest.raises(ValueError): 
+        polyT('GACTGGTTTGTGTCATATTCTTCCTGTGG')
 
 def test_polyT_onNumber():
     with pytest.raises(TypeError):
         polyT(123456789)
+
+def test_polyT_onArray():
+    with pytest.raises(TypeError): 
+        polyT(['T','A','T','G','T','G','T','G','A','T','A','T','A','C','T','T','G','C','T','G','T','G','G'])
+
+def test_polyT_onDictionary():
+    with pytest.raises(TypeError): 
+        polyT({'ATGCATGCATGCATGCATGCAGG':'ATGCATGCATGCATGCATGCAGG'})
 
 
 ########################
@@ -188,20 +238,67 @@ def test_transToDNA_onRandomSeq():
     expected = 'TTTGTGTCATATTCTTCCTAT'
     assert expected == result
 
-def test_transToDNA_onEmptyString():
-    with pytest.raises(TypeError):
-        transToDNA('')
+def test_polyT_onShortSeq():
+    with pytest.raises(ValueError): 
+        polyT('GACTGG')
 
-def test_transToDNA_onNumber():
+def test_polyT_onLongSeq():
+    with pytest.raises(ValueError): 
+        polyT('GACTGGTTTGTGTCATATTCTTCCTGTGG')
+
+def test_polyT_onNumber():
     with pytest.raises(TypeError):
-        transToDNA(123456789)
+        polyT(123456789)
+
+def test_polyT_onArray():
+    with pytest.raises(TypeError): 
+        polyT(['T','A','T','G','T','G','T','G','A','T','A','T','A','C','T','T','G','C','T','G','T','G','G'])
+
+def test_polyT_onDictionary():
+    with pytest.raises(TypeError): 
+        polyT({'ATGCATGCATGCATGCATGCAGG':'ATGCATGCATGCATGCATGCAGG'})
 
 
 #####################
 ## Testing RNAfold ##
 #####################
-def test_RNAfold():
-    pass
+@pytest.fixture
+def RNAfold_setup():
+    # Setup
+    test_input = [
+        'GCTCCTCATGCTGGACATTCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGCUUUU\n'
+        'GTTCTGGTTCCTAGTATATCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGCUUUU\n'
+        'GTATATCTGGAGAGTTAAGAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGCUUUU\n'
+    ]
+    with open('input.txt', 'w') as input:
+        input.writelines(test_input)
+    # NOTE: Everything after yeild is considered teardown as per Pytest documentation. (https://docs.pytest.org/en/7.0.x/how-to/fixtures.html#teardown-cleanup-aka-fixture-finalization)
+    yield 
+    # Teardown
+    os.remove('input.txt')
+    os.remove('output.txt')
+
+
+def test_RNAfold_output(RNAfold_setup):
+    # Run RNAfold
+    runner(f'RNAfold --noPS -j16 -i input.txt > output.txt',
+        shell=True,
+        check=True
+    )
+    # Extract results
+    with open('output.txt', 'r') as output:
+        result = output.readlines()
+    # Expected value
+    expected = [
+        'GCUCCUCAUGCUGGACAUUCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGCUUUU\n',
+        '((.......))(((((..(((((((((.((((....))))...)))))))..))...)))))......((((....))))(((((((...)))))))... (-22.40)\n',
+        'GUUCUGGUUCCUAGUAUAUCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGCUUUU\n',
+        '.(((((((((..((........))..)))))))))....((((((...((((.(......).)))).)))))).......(((((((...)))))))... (-25.20)\n',
+        'GUAUAUCUGGAGAGUUAAGAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGCUUUU\n',
+        '.......((((.((((....(((((((.((((....))))...)))))))..))))..))))......((((....))))(((((((...)))))))... (-22.50)\n'
+    ]
+    
+    assert expected == result
 
 ####################
 ## Testing mm10db ##
@@ -212,121 +309,78 @@ def test_mm10db():
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create result candidate guide dictionary
+    cm.isConfigured()
     result = {
-        'AAAAAAAAAAAAAAAAAAAAA': {
+        'ACTCCTCATGCTGGACATTCTGG': {
             'passedAvoidLeadingT'       : CODE_UNTESTED,
             'passedATPercent'           : CODE_UNTESTED,
+            'AT'                        : CODE_UNTESTED,
             'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
             'ssL1'                      : CODE_UNTESTED,
             'ssStructure'               : CODE_UNTESTED,
             'ssEnergy'                  : CODE_UNTESTED,
             'passedSecondaryStructure'  : CODE_UNTESTED,
             'acceptedByMm10db'          : CODE_UNTESTED
         },
-        'TTTTTTTTTTTTTTTTTTTTT': {
+        'ATTCTGGTTCCTAGTATATCTGG': {
             'passedAvoidLeadingT'       : CODE_UNTESTED,
             'passedATPercent'           : CODE_UNTESTED,
+            'AT'                        : CODE_UNTESTED,
             'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
             'ssL1'                      : CODE_UNTESTED,
             'ssStructure'               : CODE_UNTESTED,
             'ssEnergy'                  : CODE_UNTESTED,
             'passedSecondaryStructure'  : CODE_UNTESTED,
             'acceptedByMm10db'          : CODE_UNTESTED
         },
-        'GGGGGGGGGGGGGGGGGGGGG': {
+        'GTATATCTGGAGAGTTAAGATGG': {
             'passedAvoidLeadingT'       : CODE_UNTESTED,
             'passedATPercent'           : CODE_UNTESTED,
+            'AT'                        : CODE_UNTESTED,
             'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
             'ssL1'                      : CODE_UNTESTED,
             'ssStructure'               : CODE_UNTESTED,
             'ssEnergy'                  : CODE_UNTESTED,
             'passedSecondaryStructure'  : CODE_UNTESTED,
             'acceptedByMm10db'          : CODE_UNTESTED
-        },
-        'CCCCCCCCCCCCCCCCCCCCC': {
-            'passedAvoidLeadingT'       : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'ssL1'                      : CODE_UNTESTED,
-            'ssStructure'               : CODE_UNTESTED,
-            'ssEnergy'                  : CODE_UNTESTED,
-            'passedSecondaryStructure'  : CODE_UNTESTED,
-            'acceptedByMm10db'          : CODE_UNTESTED
-        },
-        'TTTGTGTCATATTCTTCCTGT': {
-            'passedAvoidLeadingT'       : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'ssL1'                      : CODE_UNTESTED,
-            'ssStructure'               : CODE_UNTESTED,
-            'ssEnergy'                  : CODE_UNTESTED,
-            'passedSecondaryStructure'  : CODE_UNTESTED,
-            'acceptedByMm10db'          : CODE_UNTESTED
-        },
+        }
     }
 
     # Create expected results candidate guide dictionary
     expected = {
-        'AAAAAAAAAAAAAAAAAAAAA': {
-            'passedAvoidLeadingT'       : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'ssL1'                      : CODE_UNTESTED,
-            'ssStructure'               : CODE_UNTESTED,
-            'ssEnergy'                  : CODE_UNTESTED,
-            'passedSecondaryStructure'  : CODE_UNTESTED,
-            'acceptedByMm10db'          : CODE_UNTESTED
+        'ACTCCTCATGCTGGACATTCTGG': {
+            'passedAvoidLeadingT'       : CODE_ACCEPTED,
+            'passedATPercent'           : CODE_ACCEPTED,
+            'AT'                        : 50.0,
+            'passedTTTT'                : CODE_ACCEPTED,
+            'ssL1'                      : 'GCUCCUCAUGCUGGACAUUCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGCUUUU',
+            'ssStructure'               : '((.......))(((((..(((((((((.((((....))))...)))))))..))...)))))......((((....))))(((((((...)))))))...',
+            'ssEnergy'                  : '-22.40',
+            'passedSecondaryStructure'  : CODE_ACCEPTED,
+            'acceptedByMm10db'          : CODE_ACCEPTED
         },
-        'TTTTTTTTTTTTTTTTTTTTT': {
-            'passedAvoidLeadingT'       : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'ssL1'                      : CODE_UNTESTED,
-            'ssStructure'               : CODE_UNTESTED,
-            'ssEnergy'                  : CODE_UNTESTED,
-            'passedSecondaryStructure'  : CODE_UNTESTED,
-            'acceptedByMm10db'          : CODE_UNTESTED
+        'ATTCTGGTTCCTAGTATATCTGG': {
+            'passedAvoidLeadingT'       : CODE_ACCEPTED,
+            'passedATPercent'           : CODE_ACCEPTED,
+            'AT'                        : 65.0,
+            'passedTTTT'                : CODE_ACCEPTED,
+            'ssL1'                      : 'GUUCUGGUUCCUAGUAUAUCGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGCUUUU',
+            'ssStructure'               : '.(((((((((..((........))..)))))))))....((((((...((((.(......).)))).)))))).......(((((((...)))))))...',
+            'ssEnergy'                  : '-25.20',
+            'passedSecondaryStructure'  : CODE_REJECTED,
+            'acceptedByMm10db'          : CODE_REJECTED
         },
-        'GGGGGGGGGGGGGGGGGGGGG': {
-            'passedAvoidLeadingT'       : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'ssL1'                      : CODE_UNTESTED,
-            'ssStructure'               : CODE_UNTESTED,
-            'ssEnergy'                  : CODE_UNTESTED,
-            'passedSecondaryStructure'  : CODE_UNTESTED,
-            'acceptedByMm10db'          : CODE_UNTESTED
-        },
-        'CCCCCCCCCCCCCCCCCCCCC': {
-            'passedAvoidLeadingT'       : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'ssL1'                      : CODE_UNTESTED,
-            'ssStructure'               : CODE_UNTESTED,
-            'ssEnergy'                  : CODE_UNTESTED,
-            'passedSecondaryStructure'  : CODE_UNTESTED,
-            'acceptedByMm10db'          : CODE_UNTESTED
-        },
-        'TTTGTGTCATATTCTTCCTGT': {
-            'passedAvoidLeadingT'       : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'passedTTTT'                : CODE_UNTESTED,
-            'passedATPercent'           : CODE_UNTESTED,
-            'ssL1'                      : CODE_UNTESTED,
-            'ssStructure'               : CODE_UNTESTED,
-            'ssEnergy'                  : CODE_UNTESTED,
-            'passedSecondaryStructure'  : CODE_UNTESTED,
-            'acceptedByMm10db'          : CODE_UNTESTED
-        },
+        'GTATATCTGGAGAGTTAAGATGG': {
+            'passedAvoidLeadingT'       : CODE_ACCEPTED,
+            'passedATPercent'           : CODE_ACCEPTED,
+            'AT'                        : 65.0,
+            'passedTTTT'                : CODE_ACCEPTED,
+            'ssL1'                      : 'GUAUAUCUGGAGAGUUAAGAGUUUUAGAGCUAGAAAUAGCAAGUUAAAAUAAGGCUAGUCCGUUAUCAACUUGAAAAAGUGGCACCGAGUCGGUGCUUUU',
+            'ssStructure'               : '.......((((.((((....(((((((.((((....))))...)))))))..))))..))))......((((....))))(((((((...)))))))...',
+            'ssEnergy'                  : '-22.50',
+            'passedSecondaryStructure'  : CODE_ACCEPTED,
+            'acceptedByMm10db'          : CODE_ACCEPTED
+        }
     }
 
     # Run mm10db

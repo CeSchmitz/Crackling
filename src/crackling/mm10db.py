@@ -187,11 +187,21 @@ def mm10db(candidateGuides: dict, configMngr: ConfigManager):
 
 
 def leadingT(candidateGuide: str) -> bool:
+    # Type checking
+    if (type(candidateGuide) != str):
+        raise TypeError('Incorrect input type')
+    elif (len(candidateGuide) != 23):
+        raise ValueError('Incorrect input length')
     return (candidateGuide[-2:] == 'GG' and candidateGuide[0] == 'T') or \
     (candidateGuide[:2] == 'CC' and candidateGuide[-1] == 'A')
 
 # Function that calculates the AT% of a given sequence
 def AT_percentage(candidateGuide: str) -> float:
+    # Type checking
+    if (type(candidateGuide) != str):
+        raise TypeError('Incorrect input type')
+    elif (len(candidateGuide) != 20):
+        raise ValueError('Incorrect input length')
     total = 0.0
     length = float(len(candidateGuide))
     for c in candidateGuide:
@@ -200,10 +210,19 @@ def AT_percentage(candidateGuide: str) -> float:
     return 100.0*total/length
 
 def polyT(candidateGuide: str) -> bool:
+    # Type checking
+    if (type(candidateGuide) != str):
+        raise TypeError('Incorrect input type')
+    elif (len(candidateGuide) != 23):
+        raise ValueError('Incorrect input length')
     return 'TTTT' in candidateGuide
 
 switch_UT = str.maketrans('U', 'T')
+
 # Function that replaces U with T in the sequence (to go back from RNA to DNA)
 def transToDNA(rna: str) -> str:
+    # Type checking
+    if (type(rna) != str):
+        raise TypeError('Incorrect input type')
     dna = rna.translate(switch_UT)
     return dna
