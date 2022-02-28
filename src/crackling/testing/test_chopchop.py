@@ -75,40 +75,28 @@ def test_chopchop_onTestDataset():
     cm['general']['optimisation'] = 'ultralow'
     # Create result candidate guide dictionary
     result = {
-        'AAAAAAAAAAAAAAAAAAAAAGG': {
+        'ACTCCTCATGCTGGACATTCTGG': {
             'passedG20' : CODE_UNTESTED
         },
-        'TTTTTTTTTTTTTTTTTTTTTGG': {
+        'ATTCTGGTTCCTAGTATATCTGG': {
             'passedG20' : CODE_UNTESTED
         },
-        'GGGGGGGGGGGGGGGGGGGGGGG': {
+        'GTATATCTGGAGAGTTAAGATGG': {
             'passedG20' : CODE_UNTESTED
-        },
-        'CCCCCCCCCCCCCCCCCCCCCGG': {
-            'passedG20' : CODE_UNTESTED
-        },
-        'TTTGTGTCATATTCTTCCTGTGG': {
-            'passedG20' : CODE_UNTESTED
-        },
+        }
     }
 
     # Create expected results candidate guide dictionary
     expected = {
-        'AAAAAAAAAAAAAAAAAAAAAGG': {
+        'ACTCCTCATGCTGGACATTCTGG': {
             'passedG20' : CODE_REJECTED
         },
-        'TTTTTTTTTTTTTTTTTTTTTGG': {
+        'ATTCTGGTTCCTAGTATATCTGG': {
             'passedG20' : CODE_REJECTED
         },
-        'GGGGGGGGGGGGGGGGGGGGGGG': {
-            'passedG20' : CODE_ACCEPTED
-        },
-        'CCCCCCCCCCCCCCCCCCCCCGG': {
+        'GTATATCTGGAGAGTTAAGATGG': {
             'passedG20' : CODE_REJECTED
-        },
-        'TTTGTGTCATATTCTTCCTGTGG': {
-            'passedG20' : CODE_ACCEPTED
-        },
+        }
     }
 
     # Run chopchop
