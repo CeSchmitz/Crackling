@@ -12,6 +12,31 @@ def test_rc_onPalindromicSeq():
     expected = 'ACGTACGTACGTACGTACGT'
     assert expected == result
 
+def test_rc_onFullATSeq():
+    result = rc('ATATATATATATATATATATAGG')
+    expected = 'CCTATATATATATATATATATAT'
+    assert expected == result
+
+def test_rc_onFullASeq():
+    result = rc('AAAAAAAAAAAAAAAAAAAAAGG')
+    expected = 'CCTTTTTTTTTTTTTTTTTTTTT'
+    assert expected == result
+
+def test_rc_onFullTSeq():
+    result = rc('TTTTTTTTTTTTTTTTTTTTTGG')
+    expected = 'CCAAAAAAAAAAAAAAAAAAAAA'
+    assert expected == result
+
+def test_rc_onFullGSeq():
+    result = rc('GGGGGGGGGGGGGGGGGGGGGGG')
+    expected = 'CCCCCCCCCCCCCCCCCCCCCCC'
+    assert expected == result
+
+def test_rc_onFullCSeq():
+    result = rc('CCCCCCCCCCCCCCCCCCCCCGG')
+    expected = 'CCGGGGGGGGGGGGGGGGGGGGG'
+    assert expected == result
+
 def test_rc_onEmptySeq():
     result = rc('')
     expected = ''
