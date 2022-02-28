@@ -12,50 +12,34 @@ def test_sgranscorer2_onTestDataset():
     cm['general']['optimisation'] = 'ultralow'
     # Create result candidate guide dictionary
     result = {
-        'AAAAAAAAAAAAAAAAAAAAA': {
+        'ACTCCTCATGCTGGACATTCTGG': {
             'acceptedBySgRnaScorer' : CODE_UNTESTED,
             'sgrnascorer2score'     : CODE_UNTESTED
         },
-        'TTTTTTTTTTTTTTTTTTTTT': {
+        'ATTCTGGTTCCTAGTATATCTGG': {
             'acceptedBySgRnaScorer' : CODE_UNTESTED,
             'sgrnascorer2score'     : CODE_UNTESTED
         },
-        'GGGGGGGGGGGGGGGGGGGGG': {
+        'GTATATCTGGAGAGTTAAGATGG': {
             'acceptedBySgRnaScorer' : CODE_UNTESTED,
             'sgrnascorer2score'     : CODE_UNTESTED
-        },
-        'CCCCCCCCCCCCCCCCCCCCC': {
-            'acceptedBySgRnaScorer' : CODE_UNTESTED,
-            'sgrnascorer2score'     : CODE_UNTESTED
-        },
-        'TTTGTGTCATATTCTTCCTGT': {
-            'acceptedBySgRnaScorer' : CODE_UNTESTED,
-            'sgrnascorer2score'     : CODE_UNTESTED
-        },
+        }
     }
 
     # Create expected results candidate guide dictionary
     expected = {
-        'AAAAAAAAAAAAAAAAAAAAA': {
-            'acceptedBySgRnaScorer' : CODE_ACCEPTED,
-            'sgrnascorer2score'     : 0.6509799174117802
-        },
-        'TTTTTTTTTTTTTTTTTTTTT': {
+        'ACTCCTCATGCTGGACATTCTGG': {
             'acceptedBySgRnaScorer' : CODE_REJECTED,
-            'sgrnascorer2score'     : -7.721831867973529
+            'sgrnascorer2score'     : -1.8394958342445178
         },
-        'GGGGGGGGGGGGGGGGGGGGG': {
-            'acceptedBySgRnaScorer' : CODE_ACCEPTED,
-            'sgrnascorer2score'     : 3.5543409089281313
-        },
-        'CCCCCCCCCCCCCCCCCCCCC': {
-            'acceptedBySgRnaScorer' : CODE_ACCEPTED,
-            'sgrnascorer2score'     : 1.221131568891114
-        },
-        'TTTGTGTCATATTCTTCCTGT': {
+        'ATTCTGGTTCCTAGTATATCTGG': {
             'acceptedBySgRnaScorer' : CODE_REJECTED,
-            'sgrnascorer2score'     : -0.18335989838239686
+            'sgrnascorer2score'     : -3.3132386532897384
         },
+        'GTATATCTGGAGAGTTAAGATGG': {
+            'acceptedBySgRnaScorer' : CODE_REJECTED,
+            'sgrnascorer2score'     : -0.328729309372379
+        }
     }
 
     # Run sgrnaScorer2
