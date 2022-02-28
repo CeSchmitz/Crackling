@@ -10,6 +10,9 @@ complements = str.maketrans('acgtrymkbdhvACGTRYMKBDHV', 'tgcayrkmvhdbTGCAYRKMVHD
 
 # Function that returns the reverse-complement of a given sequence
 def rc(dna: str) -> str:
+    # Type testing
+    if (type(dna) != str):
+        raise TypeError('Incorrect input type')
     rcseq = dna.translate(complements)[::-1]
     return rcseq
 
@@ -30,6 +33,12 @@ def runner(*args, **kwargs) -> None:
 
 
 def filterCandidateGuides(configMngr: ConfigManager, candidateGuides: dict, module: str):
+    # Type testing
+    if ((type(configMngr) != ConfigManager) or (type(candidateGuides) != dict) or (type(module) != str)):
+        raise TypeError('Incorrect input type')
+    elif ( module not in [MODULE_CHOPCHOP, MODULE_MM10DB, MODULE_SGRNASCORER2, MODULE_SPECIFICITY, MODULE_CONSENSUS]):
+        raise ValueError('Invalid module')
+
     optimisation = configMngr['general']['optimisation']
     consensusN = configMngr['consensus'].getint('n')
 
