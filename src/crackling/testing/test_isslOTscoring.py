@@ -20,7 +20,7 @@ def isslScoreOfftargets_setup():
     os.remove('input.txt')
     os.remove('output.txt')
 
-def test_isslScoreOfftargets(isslScoreOfftargets_setup):
+def test_isslScoreOfftargets_binary(isslScoreOfftargets_setup):
     # call the scoring method
     runner('{} {} {} {} {} {} > {}'.format(
             '../../../bin/isslScoreOfftargets',
@@ -47,7 +47,17 @@ def test_isslScoreOfftargets(isslScoreOfftargets_setup):
     assert expected == result
 
 
-def test_isslOTScoring_mitScoring():
+@pytest.fixture
+def isslOTScoring_setup():
+    # Setup 
+    # (Nothing to setup)
+    # NOTE: Everything after yeild is considered teardown as per Pytest documentation. (https://docs.pytest.org/en/7.0.x/how-to/fixtures.html#teardown-cleanup-aka-fixture-finalization)
+    yield 
+    # Teardown
+    os.remove('data/output/test-0-offtargetscore-input.txt')
+    os.remove('data/output/test-0-offtargetscore-output.txt')
+
+def test_isslOTScoring_mitScoring(isslOTScoring_setup):
     # Setup Config Manager
     cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
@@ -96,7 +106,7 @@ def test_isslOTScoring_mitScoring():
     isslOTScoring(result, cm)
     assert expected == result
 
-def test_isslOTScoring_cfdScoring():
+def test_isslOTScoring_cfdScoring(isslOTScoring_setup):
     # Setup Config Manager
     cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
@@ -145,7 +155,7 @@ def test_isslOTScoring_cfdScoring():
     isslOTScoring(result, cm)
     assert expected == result
 
-def test_isslOTScoring_andScoring():
+def test_isslOTScoring_andScoring(isslOTScoring_setup):
     # Setup Config Manager
     cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
@@ -195,7 +205,7 @@ def test_isslOTScoring_andScoring():
     isslOTScoring(result, cm)
     assert expected == result
 
-def test_isslOTScoring_orScoring():
+def test_isslOTScoring_orScoring(isslOTScoring_setup):
     # Setup Config Manager
     cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
@@ -244,7 +254,7 @@ def test_isslOTScoring_orScoring():
     isslOTScoring(result, cm)
     assert expected == result
 
-def test_isslOTScoring_avgScoring():
+def test_isslOTScoring_avgScoring(isslOTScoring_setup):
     # Setup Config Manager
     cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering

@@ -303,7 +303,17 @@ def test_RNAfold_output(RNAfold_setup):
 ####################
 ## Testing mm10db ##
 ####################
-def test_mm10db():
+@pytest.fixture
+def mm10db_setup():
+    # Setup 
+    # (Nothing to setup)
+    # NOTE: Everything after yeild is considered teardown as per Pytest documentation. (https://docs.pytest.org/en/7.0.x/how-to/fixtures.html#teardown-cleanup-aka-fixture-finalization)
+    yield 
+    # Teardown
+    os.remove('data/output/test-rnafold-input.txt')
+    os.remove('data/output/test-rnafold-output.txt')
+
+def test_mm10db(mm10db_setup):
     # Setup Config Manager
     cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
