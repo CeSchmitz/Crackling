@@ -315,7 +315,7 @@ def mm10db_setup():
 
 def test_mm10db(mm10db_setup):
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create result candidate guide dictionary

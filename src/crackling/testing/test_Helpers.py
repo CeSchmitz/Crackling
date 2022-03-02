@@ -147,7 +147,7 @@ def test_runner_timeout():
 ###################################
 def test_filterCandidateGuides_onChopchopUltralow():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -181,7 +181,7 @@ def test_filterCandidateGuides_onChopchopUltralow():
 
 def test_filterCandidateGuides_onChopchopLow():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'low'
     # Create test candidate guide dictionary
@@ -215,7 +215,7 @@ def test_filterCandidateGuides_onChopchopLow():
 
 def test_filterCandidateGuides_onChopchopMedium():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'medium'
     # Create test candidate guide dictionary
@@ -249,7 +249,7 @@ def test_filterCandidateGuides_onChopchopMedium():
 
 def test_filterCandidateGuides_onChopchopHigh():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'high'
     # Create test candidate guide dictionary
@@ -283,7 +283,7 @@ def test_filterCandidateGuides_onChopchopHigh():
 
 def test_filterCandidateGuides_onMM10dbUltralow():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -329,7 +329,7 @@ def test_filterCandidateGuides_onMM10dbUltralow():
 
 def test_filterCandidateGuides_onMM10dbLow():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'low'
     # Create test candidate guide dictionary
@@ -375,7 +375,7 @@ def test_filterCandidateGuides_onMM10dbLow():
 
 def test_filterCandidateGuides_onMM10dbMedium():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'medium'
     # Create test candidate guide dictionary
@@ -421,7 +421,7 @@ def test_filterCandidateGuides_onMM10dbMedium():
 
 def test_filterCandidateGuides_onMM10dbHigh():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'high'
     # Create test candidate guide dictionary
@@ -467,7 +467,7 @@ def test_filterCandidateGuides_onMM10dbHigh():
 
 def test_filterCandidateGuides_onSgrnaScorer2Ultralow():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -501,7 +501,7 @@ def test_filterCandidateGuides_onSgrnaScorer2Ultralow():
 
 def test_filterCandidateGuides_onSgrnaScorer2Low():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'low'
     # Create test candidate guide dictionary
@@ -535,7 +535,7 @@ def test_filterCandidateGuides_onSgrnaScorer2Low():
 
 def test_filterCandidateGuides_onSgrnaScorer2Medium():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'medium'
     # Create test candidate guide dictionary
@@ -569,7 +569,7 @@ def test_filterCandidateGuides_onSgrnaScorer2Medium():
 
 def test_filterCandidateGuides_onSgrnaScorer2High():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'high'
     # Create test candidate guide dictionary
@@ -603,7 +603,7 @@ def test_filterCandidateGuides_onSgrnaScorer2High():
 
 def test_filterCandidateGuides_onSpecificityUltralow():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -634,7 +634,7 @@ def test_filterCandidateGuides_onSpecificityUltralow():
 
 def test_filterCandidateGuides_onSpecificityLow():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'low'
     # Create test candidate guide dictionary
@@ -665,7 +665,7 @@ def test_filterCandidateGuides_onSpecificityLow():
 
 def test_filterCandidateGuides_onSpecificityMedium():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'medium'
     # Create test candidate guide dictionary
@@ -696,7 +696,7 @@ def test_filterCandidateGuides_onSpecificityMedium():
 
 def test_filterCandidateGuides_onSpecificityHigh():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'high'
     # Create test candidate guide dictionary
@@ -727,7 +727,7 @@ def test_filterCandidateGuides_onSpecificityHigh():
 
 def test_filterCandidateGuides_onEmptyDictionary_CandidateGuides():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -742,7 +742,7 @@ def test_filterCandidateGuides_onEmptyDictionary_CandidateGuides():
 
 def test_filterCandidateGuides_onNumber_CandidateGuides():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -753,7 +753,7 @@ def test_filterCandidateGuides_onNumber_CandidateGuides():
 
 def test_filterCandidateGuides_onArray_CandidateGuides():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -764,7 +764,7 @@ def test_filterCandidateGuides_onArray_CandidateGuides():
 
 def test_filterCandidateGuides_onString_CandidateGuides():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -775,7 +775,7 @@ def test_filterCandidateGuides_onString_CandidateGuides():
 
 def test_filterCandidateGuides_onInvalidModule():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -786,7 +786,7 @@ def test_filterCandidateGuides_onInvalidModule():
 
 def test_filterCandidateGuides_onEmptyDictionary_Module():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -797,7 +797,7 @@ def test_filterCandidateGuides_onEmptyDictionary_Module():
 
 def test_filterCandidateGuides_onNumber_Module():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -808,7 +808,7 @@ def test_filterCandidateGuides_onNumber_Module():
 
 def test_filterCandidateGuides_onArray_Module():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary
@@ -819,7 +819,7 @@ def test_filterCandidateGuides_onArray_Module():
 
 def test_filterCandidateGuides_onString_Module():
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Create test candidate guide dictionary

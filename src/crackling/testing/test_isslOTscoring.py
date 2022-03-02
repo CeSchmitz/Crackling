@@ -24,7 +24,7 @@ def test_isslScoreOfftargets_binary(isslScoreOfftargets_setup):
     # call the scoring method
     runner('{} {} {} {} {} {} > {}'.format(
             '../../../bin/isslScoreOfftargets',
-            'data/test_genome_offTargets_indexed.issl',
+            'data/unit-testing/test_genome_offTargets_indexed.issl',
             'input.txt',
             '4',
             '75',
@@ -40,7 +40,7 @@ def test_isslScoreOfftargets_binary(isslScoreOfftargets_setup):
 
     expected = [
         'ACTCCTCATGCTGGACATTC\t100.000000\t-1\n',
-        'ATTCTGGTTCCTAGTATATC\t62.186716\t-1\n',
+        'ATTCTGGTTCCTAGTATATC\t70.571630\t-1\n',
         'GTATATCTGGAGAGTTAAGA\t100.000000\t-1\n'
     ]
 
@@ -59,7 +59,7 @@ def isslOTScoring_setup():
 
 def test_isslOTScoring_mitScoring(isslOTScoring_setup):
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Set scoring method
@@ -91,7 +91,7 @@ def test_isslOTScoring_mitScoring(isslOTScoring_setup):
             'passedOffTargetScore'  : CODE_ACCEPTED
         },
         'ATTCTGGTTCCTAGTATATCTGG': {
-            'mitOfftargetscore'     : 62.186716,
+            'mitOfftargetscore'     : 70.571630,
             'cfdOfftargetscore'     : -1.0,
             'passedOffTargetScore'  : CODE_REJECTED
         },
@@ -108,7 +108,7 @@ def test_isslOTScoring_mitScoring(isslOTScoring_setup):
 
 def test_isslOTScoring_cfdScoring(isslOTScoring_setup):
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Set scoring method
@@ -136,12 +136,12 @@ def test_isslOTScoring_cfdScoring(isslOTScoring_setup):
     expected = {
         'ACTCCTCATGCTGGACATTCTGG': {
             'mitOfftargetscore'     : -1.0,
-            'cfdOfftargetscore'     : 100.00,
+            'cfdOfftargetscore'     : 97.087379,
             'passedOffTargetScore'  : CODE_ACCEPTED
         },
         'ATTCTGGTTCCTAGTATATCTGG': {
             'mitOfftargetscore'     : -1.0,
-            'cfdOfftargetscore'     : 99.247117,
+            'cfdOfftargetscore'     : 98.871911,
             'passedOffTargetScore'  : CODE_ACCEPTED
         },
         'GTATATCTGGAGAGTTAAGATGG': {
@@ -157,7 +157,7 @@ def test_isslOTScoring_cfdScoring(isslOTScoring_setup):
 
 def test_isslOTScoring_andScoring(isslOTScoring_setup):
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Set scoring method
@@ -186,12 +186,12 @@ def test_isslOTScoring_andScoring(isslOTScoring_setup):
     expected = {
         'ACTCCTCATGCTGGACATTCTGG': {
             'mitOfftargetscore'     : 100.000000,
-            'cfdOfftargetscore'     : 100.00,
+            'cfdOfftargetscore'     : 97.087379,
             'passedOffTargetScore'  : CODE_ACCEPTED
         },
         'ATTCTGGTTCCTAGTATATCTGG': {
-            'mitOfftargetscore'     : 60.962237,
-            'cfdOfftargetscore'     : 99.247117,
+            'mitOfftargetscore'     : 66.520367,
+            'cfdOfftargetscore'     : 98.871911,
             'passedOffTargetScore'  : CODE_ACCEPTED
         },
         'GTATATCTGGAGAGTTAAGATGG': {
@@ -207,7 +207,7 @@ def test_isslOTScoring_andScoring(isslOTScoring_setup):
 
 def test_isslOTScoring_orScoring(isslOTScoring_setup):
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Set scoring method
@@ -235,12 +235,12 @@ def test_isslOTScoring_orScoring(isslOTScoring_setup):
     expected = {
         'ACTCCTCATGCTGGACATTCTGG': {
             'mitOfftargetscore'     : 100.000000,
-            'cfdOfftargetscore'     : 100.00,
+            'cfdOfftargetscore'     : 97.087379,
             'passedOffTargetScore'  : CODE_ACCEPTED
         },
         'ATTCTGGTTCCTAGTATATCTGG': {
-            'mitOfftargetscore'     : 62.186716,
-            'cfdOfftargetscore'     : 99.301702,
+            'mitOfftargetscore'     : 70.57163,
+            'cfdOfftargetscore'     : 98.95227,
             'passedOffTargetScore'  : CODE_REJECTED
         },
         'GTATATCTGGAGAGTTAAGATGG': {
@@ -256,7 +256,7 @@ def test_isslOTScoring_orScoring(isslOTScoring_setup):
 
 def test_isslOTScoring_avgScoring(isslOTScoring_setup):
     # Setup Config Manager
-    cm = ConfigManager('data/test_config.ini', lambda x : print(f'configMngr says: {x}'))
+    cm = ConfigManager('data/unit-testing/test_config.ini', lambda x : print(f'configMngr says: {x}'))
     # Bypass optimistion filtering
     cm['general']['optimisation'] = 'ultralow'
     # Set scoring method
@@ -284,12 +284,12 @@ def test_isslOTScoring_avgScoring(isslOTScoring_setup):
     expected = {
         'ACTCCTCATGCTGGACATTCTGG': {
             'mitOfftargetscore'     : 100.000000,
-            'cfdOfftargetscore'     : 100.00,
+            'cfdOfftargetscore'     : 97.087379,
             'passedOffTargetScore'  : CODE_ACCEPTED
         },
         'ATTCTGGTTCCTAGTATATCTGG': {
-            'mitOfftargetscore'     : 60.962237,
-            'cfdOfftargetscore'     : 99.247117,
+            'mitOfftargetscore'     : 66.520367,
+            'cfdOfftargetscore'     : 98.871911,
             'passedOffTargetScore'  : CODE_ACCEPTED
         },
         'GTATATCTGGAGAGTTAAGATGG': {
